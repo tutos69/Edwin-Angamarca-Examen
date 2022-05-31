@@ -26,6 +26,7 @@
                                 <p:commandButton id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
                                 <p:columnToggler datasource="products" trigger="toggler"/>
                             </div>
+
                         </div>
                     </f:facet>
 
@@ -67,9 +68,13 @@
                         </p:cellEditor>
 
                     </p:column>
-                   
 
-                   
+                    <p:column headerText="Bodega">
+                        <f:facet name="header">Bodega</f:facet>#{a.bodega.nombre} 
+                    </p:column>
+                    <p:column headerText="Total">
+                        <f:facet name="Total">Bodega</f:facet>#{productoBeans.sumar(a)} 
+                    </p:column>
 
                     <p:column headerText="Eliminar">
                         <p:commandButton value="Eliminar" action="#{productoBeans.delate(a)}" update="products" styleClass="ui-button-raised ui-button-danger"/>

@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  *
@@ -24,18 +26,28 @@ public class Producto implements Serializable {
     private String nombre;
     private int stock;
     private double precio;
+    @OneToOne()
+    @JoinColumn(name = "id_Bodega", nullable = false, referencedColumnName = "id")
+    private Bodega bodega;
 
-    public Producto(int id, String nombre, int stock, double precio) {
+    public Producto() {
+    }
+
+    public Producto(int id, String nombre, int stock, double precio, Bodega bodega) {
         this.id = id;
         this.nombre = nombre;
         this.stock = stock;
         this.precio = precio;
+        this.bodega = bodega;
     }
 
-    public Producto() {
+    public Bodega getBodega() {
+        return bodega;
     }
-    
-    
+
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
+    }
 
     public int getId() {
         return id;
@@ -69,7 +81,6 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -92,8 +103,9 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + '}';
+        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + ", bodega=" + bodega + '}';
     }
 
    
+
 }

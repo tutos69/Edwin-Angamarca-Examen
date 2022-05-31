@@ -4,11 +4,14 @@
  */
 package ec.edu.ups.modelo;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Bodega implements Serializable {
     private int id;
     private String nombre;
     private String ciudad;
+    
 
     public int getId() {
         return id;
@@ -32,14 +36,17 @@ public class Bodega implements Serializable {
         this.id = id;
     }
 
-    public Bodega(int id, String nombre, String ciudad) {
+    public Bodega(int id, String nombre, String ciudad ) {
         this.id = id;
         this.nombre = nombre;
         this.ciudad = ciudad;
+       
     }
 
     public Bodega() {
     }
+
+  
 
     public String getNombre() {
         return nombre;
@@ -56,6 +63,7 @@ public class Bodega implements Serializable {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
 
     
     
@@ -84,6 +92,6 @@ public class Bodega implements Serializable {
         return "Bodega{" + "id=" + id + ", nombre=" + nombre + ", ciudad=" + ciudad + '}';
     }
 
-  
-    
+   
+
 }

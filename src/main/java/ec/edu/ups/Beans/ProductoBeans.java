@@ -4,7 +4,9 @@
  */
 package ec.edu.ups.Beans;
 
+import ec.edu.ups.controlador.BodegaFacade;
 import ec.edu.ups.controlador.ProductoFacade;
+import ec.edu.ups.modelo.Bodega;
 import ec.edu.ups.modelo.Producto;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
@@ -25,7 +27,12 @@ public class ProductoBeans implements Serializable {
     private static final long serialVersionUID = 1L;
     @EJB
     private ProductoFacade productoFacade;
+    @EJB
+    private BodegaFacade bodegaFacade;
+
     private List<Producto> listp = new ArrayList<>();
+    private List<Bodega> listb = new ArrayList<>();
+    private Bodega bodega;
     private int id;
     private String nombre;
     private int stock;
@@ -33,7 +40,9 @@ public class ProductoBeans implements Serializable {
 
     @PostConstruct
     public void init() {
+        this.bodega = new Bodega();
         listp = productoFacade.findAll();
+        listb = bodegaFacade.findAll();
     }
 
     public ProductoFacade getProductoFacade() {
@@ -84,8 +93,32 @@ public class ProductoBeans implements Serializable {
         this.precio = precio;
     }
 
+    public BodegaFacade getBodegaFacade() {
+        return bodegaFacade;
+    }
+
+    public void setBodegaFacade(BodegaFacade bodegaFacade) {
+        this.bodegaFacade = bodegaFacade;
+    }
+
+    public Bodega getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
+    }
+
+    public List<Bodega> getListb() {
+        return listb;
+    }
+
+    public void setListb(List<Bodega> listb) {
+        this.listb = listb;
+    }
+
     public String add() {
-        Producto p = new Producto(id, nombre, stock, precio);
+        Producto p = new Producto(id, nombre, stock, precio, bodega);
         productoFacade.create(p);
         listp = productoFacade.findAll();
         this.limpiar();
@@ -110,5 +143,10 @@ public class ProductoBeans implements Serializable {
         productoFacade.remove(s);
         listp = productoFacade.findAll();
         return null;
+    }
+    
+    public double sumar(Producto p){
+       double i = p.getPrecio()*p.getStock();
+       return i;
     }
 }

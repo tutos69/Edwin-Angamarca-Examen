@@ -5,7 +5,9 @@
 package ec.edu.ups.Beans;
 
 import ec.edu.ups.controlador.BodegaFacade;
+import ec.edu.ups.controlador.ProductoFacade;
 import ec.edu.ups.modelo.Bodega;
+import ec.edu.ups.modelo.Producto;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -25,14 +27,19 @@ public class BodegaBeans implements Serializable {
     private static final long serialVersionUID = 1L;
     @EJB
     private BodegaFacade bodegaFacade;
+    
     private List<Bodega> listp = new ArrayList<>();
+
+    private Producto producto;
     private int id;
     private String nombre;
     private String ciudad;
 
     @PostConstruct
     public void init() {
+        this.producto = new Producto();
         listp = bodegaFacade.findAll();
+       
     }
 
     public BodegaFacade getBodegaFacade() {
@@ -63,6 +70,18 @@ public class BodegaBeans implements Serializable {
         this.nombre = nombre;
     }
 
+   
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    
+    
     public String getCiudad() {
         return ciudad;
     }
