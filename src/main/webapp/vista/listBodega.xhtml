@@ -26,6 +26,9 @@
                                 <p:commandButton id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
                                 <p:columnToggler datasource="products" trigger="toggler"/>
                             </div>
+                            <div>
+                                 <p:commandButton value="Actualizar" update="products" styleClass="ui-button-raised ui-button-danger"/>
+                            </div>
                         </div>
                     </f:facet>
 
@@ -53,6 +56,9 @@
                                 <h:inputText value="#{a.ciudad}" />
                             </f:facet> 
                         </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Total">
+                        <f:facet name="header">Total</f:facet>#{bodegaBeans.total(a)} 
                     </p:column>
                     <p:column headerText="Eliminar">
                         <p:commandButton value="Eliminar" action="#{bodegaBeans.delete(a)}" update="products" styleClass="ui-button-raised ui-button-danger"/>
